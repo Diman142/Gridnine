@@ -1,13 +1,14 @@
+/* eslint-disable consistent-return */
+/* eslint-disable array-callback-return */
 export function TransferFilter(data) {
 
   if (!data.length) {
     return []
   }
 
-  console.log(1)
 
-  let firstFilter = document.querySelector('#oneTrans').checked
-  let secondFilter = document.querySelector('#noTrans').checked
+  const firstFilter = document.querySelector('#oneTrans').checked
+  const secondFilter = document.querySelector('#noTrans').checked
 
   let arr = []
 

@@ -1,7 +1,11 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/button-has-type */
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable no-shadow */
 import React, { useState, useEffect } from 'react'
 
-import Card from '../../components/Card/Card'
 import { connect } from 'react-redux'
+import Card from '../../components/Card/Card'
 import classes from './CardList.module.css'
 import { getFlightsData, showMore, changeCardAmount } from '../../redux/actions/actions'
 
@@ -12,24 +16,25 @@ const CardList = ({ filterInfo, currentCardInfo, cardAmount, getFlightsData, sho
   useEffect(() => {
     getFlightsData(cardAmount);
     setFlag(true)
-    console.log('effect', currentCardInfo)
   }, [])
 
 
   return (
-    <React.Fragment>
+    <>
       {flag ?
-        currentCardInfo.map((cardInfo, index) => {
-          return <Card cardInfo={cardInfo} key={index}></Card>
-        }) : <span>Загрузка</span>
-      }
-      <button className={classes.CardListBtn} onClick={() => {
-        let count = cardAmount + 2;
-        changeCardAmount(count)
-        showMore(count, filterInfo)
-      }}>Показать еще</button>
+        currentCardInfo.map((cardInfo, index) => <Card cardInfo={cardInfo} key={index} />) : <span>Загрузка</span>}
+      <button
+        className={classes.CardListBtn}
+        onClick={() => {
+          const count = cardAmount + 2;
+          changeCardAmount(count)
+          showMore(count, filterInfo)
+        }}
+      >
+        Показать еще
+      </button>
 
-    </React.Fragment>
+    </>
 
   )
 }
