@@ -1,0 +1,10 @@
+.flightNav {
+  position: fixed;
+  left: 5%;
+  height: 100%;
+  width: 15%;
+  background-color: #eaeaea;
+  margin-right: 5%;
+  padding-top: 1rem;
+  padding-left: 15px;
+}

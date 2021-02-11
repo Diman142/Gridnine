@@ -1,0 +1,16 @@
+.CardListBtn {
+  display: block;
+  margin-top: 1rem;
+  margin: 0 auto;
+  margin-top: 1rem;
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(13, 159, 226);
+  height: 50px;
+  width: 180px;
+  color: #fff;
+}
+
+.CardListBtn:hover {
+  background-color: rgb(13, 52, 226);
+}
