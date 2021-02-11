@@ -5,21 +5,21 @@ import CardList from './containers/CardList/CardList'
 
 function App() {
   return (
-    <React.Fragment>
-      <FlightNav></FlightNav>
+    <>
+      <FlightNav />
 
       <div className="container">
 
         <div className="app-container">
 
           <div className="app-right">
-            <CardList></CardList>
+            <CardList />
 
           </div>
         </div>
 
       </div>
-    </React.Fragment>
+    </>
 
   );
 }

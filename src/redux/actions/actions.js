@@ -1,7 +1,12 @@
+/* eslint-disable eqeqeq */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-loop-func */
+/* eslint-disable max-len */
 import axios from 'axios'
-import { SORT_VALUE, FILTER_VALUE, MIN_PRICE, MAX_PRICE, AIRLINE_FILTER, CLEAR_AIRLINE_FILTER, CARD_DATA, CLEAR_DATA, CURRENT_CARD_DATA, CLEAR_CURRENT_DATA, ADD_RESULT_COUNT, CLEAR_FILTER_INFO, CHANGE_FILTER_INFO, SET_COMPANY_CHECK } from '../types'
-import { minPriceFilter, maxPriceFilter } from '../../filters/filters'
-import { sortsCards, TransferFilter, companyFilter } from '../../filters/filters'
+import { SORT_VALUE, MIN_PRICE, MAX_PRICE, AIRLINE_FILTER, CLEAR_AIRLINE_FILTER, CARD_DATA, CLEAR_DATA, CURRENT_CARD_DATA, CLEAR_CURRENT_DATA, ADD_RESULT_COUNT, CLEAR_FILTER_INFO, CHANGE_FILTER_INFO, SET_COMPANY_CHECK } from '../types'
+import { minPriceFilter, maxPriceFilter, sortsCards, TransferFilter, companyFilter } from '../../filters/filters'
+
 
 
 function getRusDay(dayNumber) {
@@ -100,17 +105,18 @@ export function changeAirCompany(data) {
 
 export function getAeroCompany(data) {
   let count = 0;
-  let mySet = new Set();
-  let priceArr = []
+  const mySet = new Set();
+  const priceArr = []
   let prevPrice = Infinity
   let currprice = null
-  let result = []
+  const result = []
 
   data.forEach(item => {
     mySet.add(item.flight.carrier.caption)
   })
 
-  for (let item of mySet.values()) {
+
+  for (const item of mySet.values()) {
     data.forEach(el => {
       if (el.flight.carrier.caption === item) {
         currprice = Math.min(prevPrice, el.flight.price.total.amount)
@@ -120,7 +126,7 @@ export function getAeroCompany(data) {
     priceArr.push(currprice)
   };
 
-  for (let item of mySet.values()) {
+  for (const item of mySet.values()) {
     result.push({ aierCompany: item, price: priceArr[count] })
     count++
   }
@@ -209,31 +215,31 @@ export function changeCardAmount(amount) {
 
 function getFlightData(flightData = {}) {
 
-  let forwardSegmentsLength = flightData.flight.legs[0].segments.length
-  let backwardSegmentsLength = flightData.flight.legs[1].segments.length
+  const forwardSegmentsLength = flightData.flight.legs[0].segments.length
+  const backwardSegmentsLength = flightData.flight.legs[1].segments.length
 
 
   if (!(flightData.flight && flightData.flight.price && flightData.flight.legs[0].segments.length && flightData.flight.legs[1].segments.length && flightData.flight.legs[0].segments[0].departureDate && flightData.flight.legs[0].segments[forwardSegmentsLength - 1].arrivalDate && flightData.flight.legs[1].segments[0].departureDate && flightData.flight.legs[1].segments[backwardSegmentsLength - 1].arrivalDate && flightData.flight.legs[0].segments[0].departureAirport && flightData.flight.legs[0].segments[0].departureAirport.uid && flightData.flight.legs[0].segments[0].departureCity && flightData.flight.legs[0].segments[forwardSegmentsLength - 1].arrivalCity && flightData.flight.legs[0].segments[forwardSegmentsLength - 1].arrivalAirport.uid && flightData.flight.legs[0].segments[forwardSegmentsLength - 1].arrivalAirport && flightData.flight.legs[1].segments[0].departureCity && flightData.flight.legs[1].segments[0].departureAirport && flightData.flight.legs[1].segments[0].departureAirport.uid && flightData.flight.legs[1].segments[backwardSegmentsLength - 1].arrivalCity && flightData.flight.legs[1].segments[backwardSegmentsLength - 1].arrivalAirport && flightData.flight.legs[1].segments[backwardSegmentsLength - 1].arrivalAirport.uid && flightData.flight.legs[1].segments[backwardSegmentsLength - 1].airline)) {
     return null
   }
 
-  let totalPrice = flightData.flight.price.total.amount
+  const totalPrice = flightData.flight.price.total.amount
 
-  let fordepdate = new Date(flightData.flight.legs[0].segments[0].departureDate)
+  const fordepdate = new Date(flightData.flight.legs[0].segments[0].departureDate)
 
-  let forardate = new Date(flightData.flight.legs[0].segments[forwardSegmentsLength - 1].arrivalDate)
+  const forardate = new Date(flightData.flight.legs[0].segments[forwardSegmentsLength - 1].arrivalDate)
 
-  let backDepdate = new Date(flightData.flight.legs[1].segments[0].departureDate)
+  const backDepdate = new Date(flightData.flight.legs[1].segments[0].departureDate)
 
-  let backArrdate = new Date(flightData.flight.legs[1].segments[backwardSegmentsLength - 1].arrivalDate)
+  const backArrdate = new Date(flightData.flight.legs[1].segments[backwardSegmentsLength - 1].arrivalDate)
 
-  let totalTime = (backArrdate - backDepdate) + (forardate - fordepdate)
+  const totalTime = (backArrdate - backDepdate) + (forardate - fordepdate)
 
-  let forwardTimeHours = Math.floor((forardate - fordepdate) / 1000 / 3600)
-  let forwardTimeMinute = Math.floor((forardate - fordepdate) / 1000 / 60 % 60)
+  const forwardTimeHours = Math.floor((forardate - fordepdate) / 1000 / 3600)
+  const forwardTimeMinute = Math.floor((forardate - fordepdate) / 1000 / 60 % 60)
 
-  let backTimeHours = Math.floor((backArrdate - backDepdate) / 1000 / 3600)
-  let backTimeMinute = Math.floor((backArrdate - backDepdate) / 1000 / 60 % 60)
+  const backTimeHours = Math.floor((backArrdate - backDepdate) / 1000 / 3600)
+  const backTimeMinute = Math.floor((backArrdate - backDepdate) / 1000 / 60 % 60)
 
   let forTransfer = "Без пересадок"
   let backTransfer = "Без пересадок"
@@ -243,8 +249,8 @@ function getFlightData(flightData = {}) {
   let backWithoutTransfer = true
   let oneTransfer = false
   let noTransfer = true
-  let forsegmentsLength = flightData.flight.legs[0].segments.length
-  let backsegmentsLength = flightData.flight.legs[1].segments.length
+  const forsegmentsLength = flightData.flight.legs[0].segments.length
+  const backsegmentsLength = flightData.flight.legs[1].segments.length
 
   if (forsegmentsLength == 2) {
     forTransfer = "1 пересадка"
@@ -257,6 +263,7 @@ function getFlightData(flightData = {}) {
   if (forsegmentsLength > 2) {
     forTransfer = `${forsegmentsLength} пересадки`
     forOneTransefer = false
+    // eslint-disable-next-line no-unused-vars
     forWithoutTransfer = false
     noTransfer = false
   }
@@ -272,6 +279,7 @@ function getFlightData(flightData = {}) {
   if (backsegmentsLength > 2) {
     backTransfer = `${backsegmentsLength} пересадки`
     backOneTransefer = false
+    // eslint-disable-next-line no-unused-vars
     backWithoutTransfer = false
     noTransfer = false
   }
@@ -283,7 +291,7 @@ function getFlightData(flightData = {}) {
 
 
 
-  let obj = {
+  const obj = {
     logo: flightData.flight.carrier.caption,
     forwarddepAirpot: flightData.flight.legs[0].segments[0].departureAirport.caption,
     forwarddepAirpotCode: flightData.flight.legs[0].segments[0].departureAirport.uid,
@@ -332,13 +340,13 @@ function getFlightData(flightData = {}) {
     backtavelTimeHours: backTimeHours,
     backtravelTimeMinute: backTimeMinute,
 
-    backTransfer: backTransfer,
+    backTransfer,
     backairLine: flightData.flight.legs[1].segments[backwardSegmentsLength - 1].airline.caption,
 
     price: totalPrice,
-    totalTime: totalTime,
-    oneTransfer: oneTransfer,
-    noTransfer: noTransfer
+    totalTime,
+    oneTransfer,
+    noTransfer
   }
 
 
@@ -350,14 +358,14 @@ function getFlightData(flightData = {}) {
 export function getFlightsData(amountCard = 2) {
   return async dispatch => {
     try {
-      let response = await axios.get('http://localhost:3000/result')
+      const response = await axios.get('http://localhost:3000/result')
 
 
-      let userdata = []
+      const userdata = []
       let currentData = []
 
 
-      response.data.flights.forEach((item, index) => {
+      response.data.flights.forEach((item) => {
         if (getFlightData(item)) {
           userdata.push(getFlightData(item))
         }
@@ -379,10 +387,10 @@ export function getFlightsData(amountCard = 2) {
 
 export function showMore(amount, data) {
 
-  let currentData = data.slice(amount - 2, amount)
+  const currentData = data.slice(amount - 2, amount)
 
   return dispatch => {
-    //dispatch(clearCurrentData())
+    // dispatch(clearCurrentData())
     dispatch(changeCurrentData(currentData))
   }
 }

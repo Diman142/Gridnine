@@ -25,7 +25,6 @@ const filterReducer = (state = initialState, action) => {
         airlinesArr: state.airlinesArr.concat([...action.payload]),
       }
     }
-
     case CLEAR_AIRLINE_FILTER: {
       return {
         ...state,
