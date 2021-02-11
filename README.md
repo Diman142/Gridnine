@@ -21,7 +21,6 @@
 1) npm install,
 2) json-server --watch flights.json
 3) npm start
-
 На компьюетере установлена среда node-js!
 
 
