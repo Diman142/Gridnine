@@ -16,8 +16,8 @@ let aerCheckArr = []
 const FlightNav = ({ sortValue, cardInfo, minPriceValue, maxPriceValue, changeMinPrice, changeMaxPrice, airCompany, airFilter, }) => {
 
   const radios = [{ name: '-По возрастанию цены', id: 'increase' }, { name: '-По убыванию цены', id: 'degrease' }, { name: '-По времени в пути', id: 'travelTime' }]
-  const checks = [{ name: '-1 пересадка', price: "", id: 'oneTrans', className: 'filter-check' }, { name: 'без пересадок', price: "", id: 'noTrans', className: 'filter-check' }]
-  const controls = [{ name: 'от', type: 'text', value: minPriceValue, handler: changeMinPrice }, { name: 'до', type: 'text', value: maxPriceValue, handler: changeMaxPrice }]
+  const checks = [{ name: '-1 пересадка', price: "", id: 'oneTrans', className: 'filter-check' }, { name: '-без пересадок', price: "", id: 'noTrans', className: 'filter-check' }]
+  const controls = [{ name: 'от', type: 'text', value: minPriceValue, handler: changeMinPrice, placeholder: '21049' }, { name: 'до', type: 'text', value: maxPriceValue, handler: changeMaxPrice, placeholder: '149335' }]
 
 
   const [airFlag, setAirFlag] = useState(false)
