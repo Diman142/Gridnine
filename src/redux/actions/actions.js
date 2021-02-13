@@ -5,60 +5,11 @@
 /* eslint-disable max-len */
 import axios from 'axios'
 import { SORT_VALUE, MIN_PRICE, MAX_PRICE, AIRLINE_FILTER, CLEAR_AIRLINE_FILTER, CARD_DATA, CLEAR_DATA, CURRENT_CARD_DATA, CLEAR_CURRENT_DATA, ADD_RESULT_COUNT, CLEAR_FILTER_INFO, CHANGE_FILTER_INFO, SET_COMPANY_CHECK } from '../types'
-import { minPriceFilter, maxPriceFilter, sortsCards, TransferFilter, companyFilter } from '../../filters/filters'
+import { minPriceFilter, maxPriceFilter, sortsCards, TransferFilter, companyFilter, facetFilter } from '../../filters/filters'
+import { getRusDay, getRusMonth, addZero } from '../../filters/helpres'
 
 
 
-function getRusDay(dayNumber) {
-  switch (dayNumber) {
-    case 1:
-      return "пн"
-    case 2:
-      return "вт"
-    case 3:
-      return "ср"
-    case 4:
-      return "чт"
-    case 5:
-      return "пт"
-    case 6:
-      return "сб"
-    case 7:
-      return "вс"
-    default: return NaN
-  }
-}
-
-
-function getRusMonth(monthNumber) {
-  switch (monthNumber) {
-    case 0:
-      return "янв"
-    case 1:
-      return "фев"
-    case 2:
-      return "марта"
-    case 3:
-      return "апр"
-    case 4:
-      return "мая"
-    case 5:
-      return "июня"
-    case 6:
-      return "июля"
-    case 7:
-      return "авг"
-    case 8:
-      return "сент"
-    case 9:
-      return "окт"
-    case 10:
-      return "нояб"
-    case 11:
-      return "дек"
-    default: return NaN
-  }
-}
 
 export function changeMinPrice(price, data, sortParam, minValue, maxValue, airlinesArr) {
 
@@ -69,6 +20,7 @@ export function changeMinPrice(price, data, sortParam, minValue, maxValue, airli
     arr = [...companyFilter(arr, airlinesArr)]
     arr = [...TransferFilter(arr)]
     arr = [...sortsCards(sortParam, arr)]
+    facetFilter('aerofilters', arr)
     dispatch({ type: CLEAR_FILTER_INFO })
     dispatch({ type: CHANGE_FILTER_INFO, payload: arr })
     dispatch({ type: CLEAR_CURRENT_DATA })
@@ -86,6 +38,7 @@ export function changeMaxPrice(price, data, sortParam, minValue, maxValue, airli
     arr = [...companyFilter(arr, airlinesArr)]
     arr = [...TransferFilter(arr)]
     arr = [...sortsCards(sortParam, arr)]
+    facetFilter('aerofilters', arr)
     dispatch({ type: CLEAR_FILTER_INFO })
     dispatch({ type: CHANGE_FILTER_INFO, payload: arr })
     dispatch({ type: CLEAR_CURRENT_DATA })
@@ -124,6 +77,7 @@ export function getAeroCompany(data) {
       }
     })
     priceArr.push(currprice)
+    prevPrice = Infinity
   };
 
   for (const item of mySet.values()) {
@@ -298,7 +252,7 @@ function getFlightData(flightData = {}) {
     forwarddepCity: flightData.flight.legs[0].segments[0].departureCity.caption,
     forwarddepDay: getRusDay(fordepdate.getDay()),
     forwarddepTimeHours: fordepdate.getHours(),
-    forwarddepTimeMinutes: fordepdate.getMinutes(),
+    forwarddepTimeMinutes: addZero(fordepdate.getMinutes()),
     forwarddepDate: fordepdate.getDate(),
     forwarddepMounth: getRusMonth(fordepdate.getMonth()),
 
@@ -307,13 +261,13 @@ function getFlightData(flightData = {}) {
     forwardarrAirpotCode: flightData.flight.legs[0].segments[forwardSegmentsLength - 1].arrivalAirport.uid,
     forwardarrCity: flightData.flight.legs[0].segments[forwardSegmentsLength - 1].arrivalAirport.caption,
     forwardarrTimeHours: forardate.getHours(),
-    forwardarrTimeMinutes: forardate.getMinutes(),
+    forwardarrTimeMinutes: addZero(forardate.getMinutes()),
     forwardarrDate: forardate.getDate(),
     forwardarrMounth: getRusMonth(forardate.getMonth()),
     forwardarrDay: getRusDay(forardate.getDay()),
 
     forwardtavelTimeHours: forwardTimeHours,
-    forwardtravelTimeMinute: forwardTimeMinute,
+    forwardtravelTimeMinute: addZero(forwardTimeMinute),
 
     forwardTransfer: forTransfer,
     forwardairLine: flightData.flight.legs[0].segments[0].airline.caption,
@@ -322,7 +276,7 @@ function getFlightData(flightData = {}) {
     backdepAirpot: flightData.flight.legs[1].segments[0].departureAirport.caption,
     backdepAirpotCode: flightData.flight.legs[1].segments[0].departureAirport.uid,
     backdepTimeHours: backDepdate.getHours(),
-    backdepTimeMinutes: backDepdate.getMinutes(),
+    backdepTimeMinutes: addZero(backDepdate.getMinutes()),
     backdepDate: backDepdate.getDate(),
     backdepMounth: getRusMonth(backDepdate.getMonth()),
     backdepDay: getRusDay(backDepdate.getDay()),
@@ -332,13 +286,13 @@ function getFlightData(flightData = {}) {
     backarrAirpot: flightData.flight.legs[1].segments[backwardSegmentsLength - 1].arrivalAirport.caption,
     backarrAirpotCode: flightData.flight.legs[1].segments[backwardSegmentsLength - 1].arrivalAirport.uid,
     backarrTimeHours: backArrdate.getHours(),
-    backarrTimeMinutes: backArrdate.getMinutes(),
+    backarrTimeMinutes: addZero(backArrdate.getMinutes()),
     backarrDate: backArrdate.getDate(),
     backarrMounth: getRusMonth(backArrdate.getMonth()),
     backarrDay: getRusDay(backArrdate.getDay()),
 
     backtavelTimeHours: backTimeHours,
-    backtravelTimeMinute: backTimeMinute,
+    backtravelTimeMinute: addZero(backTimeMinute),
 
     backTransfer,
     backairLine: flightData.flight.legs[1].segments[backwardSegmentsLength - 1].airline.caption,

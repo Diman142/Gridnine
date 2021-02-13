@@ -5,7 +5,7 @@ import React from 'react'
 import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux'
 import { changeCurrentData, changeSortValue, clearCurrentData, changeFilteInfo, clearFilterInfo } from '../../redux/actions/actions'
-import { sortsCards, TransferFilter, companyFilter } from '../../filters/filters'
+import { sortsCards, TransferFilter, companyFilter, facetFilter } from '../../filters/filters'
 
 
 const Checks = ({ airlinesArr, checks, title, cardInfo, changeCurrentData, clearCurrentData, changeFilteInfo, clearFilterInfo, sortValue }) => (
@@ -24,6 +24,7 @@ const Checks = ({ airlinesArr, checks, title, cardInfo, changeCurrentData, clear
             let filterData = sortsCards(sortValue, TransferFilter(cardInfo))
             filterData = [...companyFilter(filterData, airlinesArr)]
             changeFilteInfo(filterData)
+            facetFilter('aerofilters', filterData)
             const currentData = filterData.slice(0, 2)
             clearCurrentData();
             changeCurrentData(currentData)

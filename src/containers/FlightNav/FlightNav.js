@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-boolean-value */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-shadow */
 /* eslint-disable react/prop-types */
@@ -33,7 +34,7 @@ const FlightNav = ({ sortValue, cardInfo, minPriceValue, maxPriceValue, changeMi
       <Checks title="Фильтровать" checks={checks} />
       <Controls controls={controls} />
 
-      <Form className="mb-5">
+      <Form className="mb-5" id="aerofilters">
         <h5>Авиакомпании</h5>
         <Form.Group id="formGridCheckbox">
           {airFlag ? airCompany.map((check, index) => (

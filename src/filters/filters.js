@@ -1,3 +1,5 @@
+/* eslint-disable no-debugger */
+/* eslint-disable no-param-reassign */
 /* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
 export function TransferFilter(data) {
@@ -107,4 +109,32 @@ export function companyFilter(data, companyArr) {
 
   return aeroArr
 
+}
+
+export function facetFilter(formSelector, filterdata) {
+
+  let comapnySet = new Set()
+
+  const checkForm = document.getElementById(`${formSelector}`)
+
+  const checks = checkForm.querySelectorAll('.form-check-input')
+
+
+  filterdata.forEach(item => {
+    comapnySet.add(item.logo.trim())
+  })
+
+  comapnySet = Array.from(comapnySet)
+
+  checks.forEach(el => {
+
+    if (!(comapnySet.includes(el.id.trim()))) {
+      el.setAttribute('disabled', true)
+    } else {
+      el.removeAttribute('disabled')
+    }
+  })
+
+  // console.log('checks', checks)
+  // console.log(filterdata)
 }
