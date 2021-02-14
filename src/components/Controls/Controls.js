@@ -6,15 +6,17 @@ import { connect } from 'react-redux'
 
 
 const Controls = ({ controls, cardInfo, sortValue, minPriceValue, maxPriceValue, airlinesArr }) => (
-  <Form>
-    <Form.Group className="">
 
+  <Form>
+    <h5>Цена</h5>
+    <Form.Group className="">
       {controls.map((control, index) => (
         <div className="d-flex" key={index + control}>
           <span>{control.name}</span>
           <Form.Control
             type={control.type}
             className="ml-3 mb-4 user-control"
+            placeholder={`${control.placeholder} руб`}
             value={control.value}
             onChange={(event) => {
               control.handler(event.target.value, cardInfo, sortValue, minPriceValue, maxPriceValue, airlinesArr)
