@@ -5,7 +5,7 @@
 /* eslint-disable max-len */
 import axios from 'axios'
 import { SORT_VALUE, MIN_PRICE, MAX_PRICE, AIRLINE_FILTER, CLEAR_AIRLINE_FILTER, CARD_DATA, CLEAR_DATA, CURRENT_CARD_DATA, CLEAR_CURRENT_DATA, ADD_RESULT_COUNT, CLEAR_FILTER_INFO, CHANGE_FILTER_INFO, SET_COMPANY_CHECK } from '../types'
-import { minPriceFilter, maxPriceFilter, sortsCards, TransferFilter, companyFilter, facetFilter } from '../../filters/filters'
+import { minPriceFilter, maxPriceFilter, sortsCards, TransferFilter, companyFilter, facetFilter, facettravelFilter } from '../../filters/filters'
 import { getRusDay, getRusMonth, addZero } from '../../filters/helpres'
 
 
@@ -100,7 +100,7 @@ export function airFilter(data, filterArr, sortParam, minValue, maxValue) {
     arr = [...maxPriceFilter(arr, maxValue)]
     arr = [...TransferFilter(arr)]
     arr = [...sortsCards(sortParam, arr)]
-
+    facettravelFilter('travelsChecs', arr)
     dispatch({ type: CLEAR_FILTER_INFO })
     dispatch({ type: CHANGE_FILTER_INFO, payload: arr })
     dispatch({ type: CLEAR_CURRENT_DATA })

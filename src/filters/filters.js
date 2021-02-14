@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-debugger */
 /* eslint-disable no-param-reassign */
 /* eslint-disable consistent-return */
@@ -135,6 +136,36 @@ export function facetFilter(formSelector, filterdata) {
     }
   })
 
-  // console.log('checks', checks)
-  // console.log(filterdata)
+}
+
+
+export function facettravelFilter(formSelector, filterdata) {
+
+  const checkForm = document.getElementById(`${formSelector}`)
+
+  const checks = checkForm.querySelectorAll('.form-check-input')
+
+  checks.forEach((item => {
+    if (item.id === "oneTrans") {
+      item.setAttribute('disabled', true)
+      filterdata.forEach(el => {
+        if (el.oneTransfer) {
+          item.removeAttribute('disabled')
+          return true
+        }
+      })
+    }
+
+    if (item.id === "noTrans") {
+      item.setAttribute('disabled', true)
+      filterdata.forEach(el => {
+        if (el.noTransfer) {
+          item.removeAttribute('disabled')
+          return true
+        }
+      })
+    }
+  }))
+
+
 }

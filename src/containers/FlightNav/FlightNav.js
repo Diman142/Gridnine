@@ -51,7 +51,6 @@ const FlightNav = ({ sortValue, cardInfo, minPriceValue, maxPriceValue, changeMi
                 } else {
                   aerCheckArr = aerCheckArr.filter((el) => el !== event.target.id)
                   airFilter(cardInfo, aerCheckArr, sortValue, minPriceValue, maxPriceValue)
-
                 }
               }}
             />

@@ -9,7 +9,7 @@ import { sortsCards, TransferFilter, companyFilter, facetFilter } from '../../fi
 
 
 const Checks = ({ airlinesArr, checks, title, cardInfo, changeCurrentData, clearCurrentData, changeFilteInfo, clearFilterInfo, sortValue }) => (
-  <Form className="mb-5">
+  <Form className="mb-5" id="travelsChecs">
     <h5>{title || ""}</h5>
     <Form.Group id="formGridCheckbox">
       {checks.map((check, index) => (
