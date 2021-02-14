@@ -26,7 +26,7 @@ https://gridnine-2e3e2.web.app/
 В терминале:
 
 1) npm install,
-2*) Если требуется запустить локально базу данных с использование mock файла flights.json требуется использовать json-server и выполнить комнду json-server --watch flights.json
+2) Если требуется запустить локально базу данных с использование mock файла flights.json требуется использовать json-server и выполнить комнду json-server --watch flights.json
 3) npm start
 4) Для того чтобы приложение заработало требуется исправить путь в файле action.js строку const response = await axios.get('https://gridnine-2e3e2-default-rtdb.firebaseio.com/result.json') на  const response = await axios.get('http://localhost:3000/result')
 
