@@ -6,11 +6,15 @@ import CardList from './containers/CardList/CardList'
 function App() {
   return (
     <>
-      <FlightNav />
+
 
       <div className="container">
 
         <div className="app-container">
+
+          <div className="app-left">
+            <FlightNav />
+          </div>
 
           <div className="app-right">
             <CardList />

@@ -24,3 +24,13 @@ code {
 .app-right {
   width: 100%;
 }
+
+
+.app-left {
+  min-height: 100%;
+  width: 35%;
+  background-color: #eaeaea;
+  margin-right: 5%;
+  padding-top: 0.5rem;
+  padding-left: 15px;
+}

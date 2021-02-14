@@ -9,8 +9,6 @@ import { minPriceFilter, maxPriceFilter, sortsCards, TransferFilter, companyFilt
 import { getRusDay, getRusMonth, addZero } from '../../filters/helpres'
 
 
-
-
 export function changeMinPrice(price, data, sortParam, minValue, maxValue, airlinesArr) {
 
   return dispatch => {
@@ -92,8 +90,6 @@ export function changeFilteInfo(filterInfo) {
     dispatch({ type: CHANGE_FILTER_INFO, payload: filterInfo })
   }
 }
-
-
 
 export function airFilter(data, filterArr, sortParam, minValue, maxValue) {
   return dispatch => {
@@ -312,12 +308,10 @@ function getFlightData(flightData = {}) {
 export function getFlightsData(amountCard = 2) {
   return async dispatch => {
     try {
-      const response = await axios.get('http://localhost:3000/result')
-
+      const response = await axios.get('https://gridnine-2e3e2-default-rtdb.firebaseio.com/result.json')
 
       const userdata = []
       let currentData = []
-
 
       response.data.flights.forEach((item) => {
         if (getFlightData(item)) {
@@ -325,14 +319,15 @@ export function getFlightsData(amountCard = 2) {
         }
       })
 
-      getAeroCompany(response.data.flights)
-
       dispatch(changeAirCompany(getAeroCompany(response.data.flights)))
 
-      dispatch(changeData(userdata))
       dispatch(changeFilteInfo(userdata))
+      dispatch(changeData(userdata))
+
+
       currentData = userdata.slice(0, amountCard)
       dispatch(changeCurrentData(currentData))
+
     } catch (e) {
       console.error(e)
     }
@@ -344,7 +339,6 @@ export function showMore(amount, data) {
   const currentData = data.slice(amount - 2, amount)
 
   return dispatch => {
-    // dispatch(clearCurrentData())
     dispatch(changeCurrentData(currentData))
   }
 }

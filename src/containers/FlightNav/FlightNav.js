@@ -55,7 +55,7 @@ const FlightNav = ({ sortValue, cardInfo, minPriceValue, maxPriceValue, changeMi
                 }
               }}
             />
-          )) : <div>ЧТо-то не так</div>}
+          )) : <span>Загрузка...</span>}
         </Form.Group>
       </Form>
 
